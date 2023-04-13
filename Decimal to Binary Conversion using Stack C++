@@ -1,0 +1,82 @@
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
+class Node {
+public:
+	int data;
+	Node* next;
+	Node(int val = 0, Node* ptr1 = NULL) {
+		data = val;
+		next = ptr1;
+	}
+};
+
+class Stack {
+	Node* head;
+public:
+	Stack() {
+		head = NULL;
+	}
+	bool isEmpty() {
+		return head == NULL;
+	}
+	void push(int val) {
+		Node* temp = new Node(val, NULL);
+		if (isEmpty()) {
+			head = temp;
+		}
+		else {
+			temp->next = head;
+			head = temp;
+		}
+	}
+	void pop() {
+		if (isEmpty()) {
+			cout << "Queue is Empty" << endl;
+		}
+		else {
+			Node* ptr = head;
+			head = head ->next;
+			cout << "Popped value is: " << ptr->data << endl;
+			delete ptr;
+		}
+	}
+	void top() {
+		if (isEmpty()) {
+			cout << "Stack is Empty" << endl;
+		}
+		else {
+			cout << "Top value of Stack is: " << head->data << endl;
+		}
+	}
+
+	void display() {
+		if (isEmpty()) {
+			cout << "Stack is Empty" << endl;
+		}
+		else {
+			Node* ptr = head;
+			cout << "Binary of Number is: ";
+			while (ptr != NULL) {
+				cout << ptr->data;
+				ptr = ptr->next;
+			}
+		}
+	}
+}s1;
+
+void dec_to_bin(int val) {
+	do {
+		int digit = val % 2;
+		s1.push(digit);
+		val = val / 2;
+	} while (val > 0);
+}
+
+int main() {
+	dec_to_bin(52);
+	s1.display();
+	_getch();
+	return 0;
+}
