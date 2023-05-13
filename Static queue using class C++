@@ -1,0 +1,70 @@
+#include <iostream>
+#include <conio.h>
+int const MAX = 10;
+using namespace std;
+class Queue
+{
+private:
+    char arr[MAX];
+    int front, rear;
+public:
+    Queue();
+    void ins_q(char item);
+    char del_q();
+};
+Queue::Queue() {
+    front = -1;
+    rear = -1;
+}
+void Queue::ins_q(char item) {
+    if (rear == (MAX - 1)) {
+        cout << "\n Queue is full "; return;
+    }
+    if (front == -1) {
+        front = 0;
+    }
+    rear++;
+    arr[rear] = item;
+}
+
+char Queue::del_q()
+{
+    char data;
+    if (front == -1) {
+        cout << "\n Queue is empty";
+        return NULL;
+    }
+    data = arr[front];
+    arr[front] = 0;
+    if (front == rear) {
+        front = -1;
+        rear = -1;
+    }
+    else {
+        front++;
+    }
+    return data;
+}
+
+
+int main() {
+    Queue a;
+    a.ins_q('A');
+    a.ins_q('B');
+    a.ins_q('C');
+    a.ins_q('D');
+    a.ins_q('E');
+    a.ins_q('F');
+    a.ins_q('G');
+    a.ins_q('H');
+    a.ins_q('I');
+    a.ins_q('J');
+    char i = a.del_q();
+    cout << "Deleted item: " << i << endl;
+    i = a.del_q();
+    cout << "Deleted item: " << i << endl;
+    i = a.del_q();
+    cout << "Deleted item: " << i << endl;
+    _getch();
+    return 0;
+}
